@@ -24,6 +24,15 @@ export type cep = {
   siafi: string;
 };
 
+export type NewCEP = {
+  logradouro: string;
+  complemento: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+};
+
+
 export type address = Omit<cep, 'cep' | 'ibge' | 'gia' | 'ddd' | 'siafi'>;
 
 export type cepError = {

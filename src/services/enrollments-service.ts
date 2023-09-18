@@ -5,15 +5,7 @@ import { request } from '@/utils/request';
 import { addressRepository, CreateAddressParams, enrollmentRepository, CreateEnrollmentParams } from '@/repositories';
 import { exclude } from '@/utils/prisma-utils';
 import { validButInexistentError } from '@/errors/validButInexistent';
-import { cep } from '@/protocols';
-
-type NewCEP = {
-  logradouro: string;
-  complemento: string;
-  bairro: string;
-  cidade: string;
-  uf: string;
-};
+import { cep, NewCEP } from '@/protocols';
 
 async function validateCEP(cep: string) {
   const result: AxiosResponse = await request.get(`${process.env.VIA_CEP_API}/${cep}/json/`);
