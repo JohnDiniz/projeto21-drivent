@@ -10,26 +10,27 @@ export async function getTicketTypes(req: AuthenticatedRequest, res: Response) {
     const ticketTypes: TicketType[] = await prisma.ticketType.findMany();
 
     if (ticketTypes.length === 0) {
-      return res.status(204).send();
+      // Return an empty array with a 200 status when there are no ticket types.
+      return res.status(401).json([]);
     }
 
-    const formattedTicketTypes: TicketType[] = ticketTypes.map(
-      ({ id, name, price, isRemote, includesHotel, createdAt, updatedAt }) => ({
-        id,
-        name,
-        price,
-        isRemote,
-        includesHotel,
-        createdAt,
-        updatedAt,
-      }),
-    );
+    // If there are ticket types, format and send them as JSON.
+    const formattedTicketTypes = ticketTypes.map((type) => ({
+      id: type.id,
+      name: type.name,
+      price: type.price,
+      isRemote: type.isRemote,
+      includesHotel: type.includesHotel,
+      createdAt: type.createdAt,
+      updatedAt: type.updatedAt,
+    }));
 
     return res.status(200).json(formattedTicketTypes);
   } catch (error) {
-    console.error('Erro ao buscar tipos de ingresso:', error);
-    return res.status(500).json({ error: 'Erro ao buscar tipos de ingresso.' });
+    console.error('Error fetching ticket types:', error);
+    return res.status(500).json({ error: 'Error fetching ticket types.' });
   } finally {
+    // Always disconnect from the Prisma client to prevent resource leaks.
     await prisma.$disconnect();
   }
 }
