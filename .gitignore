@@ -5,3 +5,4 @@ node_modules
 yarn.lock
 .vscode
 pnpm-lock.yaml
+.DS_Store
