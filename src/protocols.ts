@@ -36,3 +36,13 @@ export type TicketType = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export interface Ticket {
+  id: number;
+  status: 'RESERVED' | 'PAID';
+  ticketTypeId: number;
+  enrollmentId: number;
+  TicketType: TicketType;
+  createdAt: Date;
+  updatedAt: Date;
+}
