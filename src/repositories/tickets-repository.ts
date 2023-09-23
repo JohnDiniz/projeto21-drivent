@@ -1,4 +1,4 @@
-import { PrismaClient, TicketType } from '@prisma/client';
+import { PrismaClient, TicketType, Ticket } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -25,7 +25,7 @@ export async function findTicketByUserId(userId: number) {
   }
 }
 
-export async function createTicket(ticketData: any) {
+export async function createTicket(ticketData: Omit<Ticket, 'id'>) {
   try {
     const createdTicket = await prisma.ticket.create({
       data: ticketData,
