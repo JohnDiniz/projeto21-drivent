@@ -99,17 +99,15 @@ export async function createTicketPayments(req: AuthenticatedRequest, res: Respo
       return res.status(401).json({ error: 'Usuário não possui ingresso' });
     }
 
-    // Process payment and create a new Payment record
     const createdPayment = await prisma.payment.create({
       data: {
         ticketId,
-        value: ticket.TicketType.price, // Accessing the TicketType's price
+        value: ticket.TicketType.price,
         cardIssuer: cardData.issuer,
-        cardLastDigits: cardData.number.slice(-4), // Get the last 4 digits of the card number
+        cardLastDigits: cardData.number.slice(-4),
       },
     });
 
-    // Update the status of the ticket to PAID
     await prisma.ticket.update({
       where: {
         id: ticketId,
