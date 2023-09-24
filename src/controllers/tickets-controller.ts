@@ -20,7 +20,7 @@ export async function getTicketTypes(req: AuthenticatedRequest, res: Response) {
 export async function getUserTicket(req: AuthenticatedRequest, res: Response) {
   try {
     const userId = req.userId;
-    console.log(userId);
+    // console.log(userId);
     const userTicket = await findUserTicket(userId);
 
     if (!userTicket) {
