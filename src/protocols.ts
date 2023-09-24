@@ -46,3 +46,13 @@ export interface Ticket {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type PaymentsType = {
+  id: number;
+  ticketId: number;
+  value: number;
+  cardIssuer: 'VISA' | 'MASTERCARD';
+  cardLastDigits: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
