@@ -88,14 +88,14 @@ export async function createTicketPayments(req: AuthenticatedRequest, res: Respo
       return res.status(401).json({ error: 'Usuário não possui ingresso' });
     }
 
-    const existingTicketown = await prisma.ticket.findFirst({
+    const existingTicketOwn = await prisma.ticket.findFirst({
       where: {
         enrollmentId: enrollment.id,
         id: ticketId,
       },
     });
 
-    if (!existingTicketown) {
+    if (!existingTicketOwn) {
       return res.status(401).json({ error: 'Usuário não possui ingresso' });
     }
 
