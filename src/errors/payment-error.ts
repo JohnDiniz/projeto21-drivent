@@ -5,7 +5,5 @@ export function PaymentError(message: string, status: number): RequestError {
     name: 'PaymentError',
     message,
     status,
-    data: null,
-    statusText: 'Payment Error',
   };
 }

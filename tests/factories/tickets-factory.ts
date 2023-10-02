@@ -3,6 +3,7 @@ import { TicketStatus } from '@prisma/client';
 import { prisma } from '@/config';
 
 export async function createTicketType(isRemote: boolean, includesHotel: boolean) {
+  //faker.datatype.boolean()
   return prisma.ticketType.create({
     data: {
       name: faker.name.findName(),

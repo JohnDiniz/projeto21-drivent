@@ -27,28 +27,15 @@ async function receiveHotelById(userId: number, hotelId: number) {
 
 async function checkConditions(userId: number) {
   const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);
-
-  if (!enrollment) {
-    throw notFoundError();
-  }
-
+  if (!enrollment) throw notFoundError();
   const userTicket = await ticketsRepository.findTicketByEnrollmentId(enrollment.id);
-
-  if (!userTicket) {
-    throw notFoundError();
-  }
-
-  if (userTicket.status !== 'PAID') {
+  if (!userTicket) throw notFoundError();
+  else if (userTicket.status != `PAID`)
     throw PaymentError('O status do ticket deve ser Pago', httpStatus.PAYMENT_REQUIRED);
-  }
-
-  if (userTicket.TicketType.isRemote) {
-    throw PaymentError('O tipo de ticket não deve ser remoto', httpStatus.PAYMENT_REQUIRED);
-  }
-
-  if (!userTicket.TicketType.includesHotel) {
-    throw PaymentError('O TicketType deve incluir hotéis', httpStatus.PAYMENT_REQUIRED);
-  }
+  else if (userTicket.TicketType.isRemote)
+    throw PaymentError('The type of ticket must not be remote', httpStatus.PAYMENT_REQUIRED);
+  else if (!userTicket.TicketType.includesHotel)
+    throw PaymentError('TicketType must include hotels', httpStatus.PAYMENT_REQUIRED);
 }
 
 export const hotelsService = {

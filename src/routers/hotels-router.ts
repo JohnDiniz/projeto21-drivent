@@ -2,8 +2,8 @@ import { Router } from 'express';
 import { authenticateToken } from '@/middlewares';
 import { getHotelById, getHotels } from '@/controllers';
 
-const hotelRouter = Router();
+const hotelsRouter = Router();
 
-hotelRouter.all('/*', authenticateToken).get('/', getHotels).get('/:id', getHotelById);
+hotelsRouter.all('/*', authenticateToken).get('/', getHotels).get('/:id', getHotelById);
 
-export { hotelRouter };
+export { hotelsRouter };
