@@ -1,4 +1,4 @@
-import { Payment, Ticket } from '@prisma/client';
+import { Room, Payment, Ticket, Address } from '@prisma/client';
 
 export type ApplicationError = {
   name: string;
@@ -7,8 +7,8 @@ export type ApplicationError = {
 
 export type RequestError = {
   status: number;
-  data: object | null;
-  statusText: string;
+  data?: object | null;
+  statusText?: string;
   name: string;
   message: string;
 };
@@ -49,3 +49,22 @@ export type InputPaymentBody = {
 };
 
 export type PaymentParams = Omit<Payment, 'id' | 'createdAt' | 'updatedAt'>;
+
+type RoomRented = Omit<Room, 'id' | 'createdAt' | 'updatedAt'>;
+
+export type BookingWithRoom = {
+  id: number;
+  Room: RoomRented;
+};
+
+export type EnrollmentMockType = {
+  id: number;
+  name: string;
+  cpf: string;
+  birthday: Date;
+  phone: string;
+  userId: number;
+  Address: Address[];
+  createdAt: Date;
+  updatedAt: Date;
+};
