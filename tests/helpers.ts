@@ -26,3 +26,4 @@ export async function generateValidToken(user?: User) {
 
   return token;
 }
+//test
